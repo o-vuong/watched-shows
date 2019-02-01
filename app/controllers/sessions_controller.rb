@@ -6,12 +6,15 @@ class SessionsController < ApplicationController
 
   post '/sessions' do
     login(params[:email])
-
+    # is it correct user
+    # check  user with email
+    # redir to /login if not
     redirect '/shows'
   end
 
   get '/logout' do 
-    session.clear
+    logout!
+    redirect '/shows'
   end
 
 
