@@ -1,0 +1,7 @@
+<h1><%=@user.uname %></h1>
+<%= @users.email %>
+
+<form method="post" action="/users/<%= @users.id %>">
+  <input type="hidden" name="_method" value="delete" />
+  <input type="submit" />
+</form>
