@@ -1,18 +1,15 @@
-<%=@shows.each do |shows|%>
+<% @shows = Show.find_by(params[:id]) %>
 
 
-<form action="/shows/<%=shows.id%>" method="post">
-  <ul>
-    <li>
-      <label for="title">Title</label>
-      <input id="title" type="text" name="title" value="<%=shows.title %>" />
-    </li>
-    <li>
-      <label for="date">Date Finished</label>
-      <textarea id="date" type="text" name="date"  value="<%=shows.date %>">
-      </textarea>
-    </li>
-  </ul>
-  <% end %>
-  <input type="submit" value="Update"/>
-</form>
+  <h1>Edit <%= @shows.title %></h1>
+
+  <form action="/shows/<%= @shows.id %>" method="POST">
+    <label> Shows Title </label>
+    <input type="text" name="name" value="<%= @shows.title %>"/> 
+
+    <label> Finish Date:</label>
+    <input type="text" name="date" value="<%= @shows.date %>"/> 
+    
+
+    <input type="submit" value="Update"/>
+  </form>]
