@@ -12,5 +12,7 @@ class UsersController < ApplicationController
       redirect '/login'
     else
       erb :'/users/new.html'
+    end
+  end
 end
 

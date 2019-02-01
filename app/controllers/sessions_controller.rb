@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   post '/sessions' do
-    login(params[:email])
+    login(params[:email], params[:password])
     # is it correct user
     # check  user with email
     # redir to /login if not

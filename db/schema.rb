@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190201083306) do
+ActiveRecord::Schema.define(version: 20190201145558) do
 
   create_table "shows_watched", force: :cascade do |t|
     t.text     "title"
@@ -21,11 +21,8 @@ ActiveRecord::Schema.define(version: 20190201083306) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.text     "username"
-    t.text     "password_digest"
-    t.text     "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "password_digest"
   end
 
 end

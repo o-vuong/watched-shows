@@ -17,13 +17,16 @@ class ShowsWatchedController < ApplicationController
   end
 
 
-  get '/posts/:id/edit' do
+  get '/shows/:id/edit' do
      #checks
      if !logged_in?
-      #makes user login if not already
       redirect '/login'
     else
-      "Edit form" #redir if logged in
+     if post = current_user.shows.find(params[:id])
+      "Edit the show you watched" 
+     else
+      redirect '/shows'
+     end
     end
   end
 
