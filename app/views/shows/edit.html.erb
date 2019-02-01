@@ -1,17 +1,18 @@
-<%= @shows.title%>
+<%=@shows.each do |shows|%>
 
 
-<form action="/shows/<%=@shows.id%>" method="post">
+<form action="/shows/<%=shows.id%>" method="post">
   <ul>
     <li>
       <label for="title">Title</label>
-      <input id="title" type="text" name="title" value="<%= @shows.title %>" />
+      <input id="title" type="text" name="title" value="<%=shows.title %>" />
     </li>
     <li>
       <label for="date">Date Finished</label>
-      <textarea id="date" type="text" name="date"  value="<%= @shows.date %>">
+      <textarea id="date" type="text" name="date"  value="<%=shows.date %>">
       </textarea>
     </li>
   </ul>
+  <% end %>
   <input type="submit" value="Update"/>
 </form>

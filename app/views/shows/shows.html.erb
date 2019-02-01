@@ -1,6 +1,12 @@
 <h1>List of shows you've finished</h1>
 <% @shows.each do |show|%>
-<%= show.title%> <br/>
-<%= show.date%> <br/>
-<%= show.id%> <br/>
-<%end%>
+<table>
+    <td>Show:<%= show.title%> <br></td>
+    <td>Date:<%= show.date%> <br></td>
+    <td>ID:<%= show.id %><br></td>
+    <td><a href="/shows/:id/edit">Edit</a></td>
+    <% end %>
+    
+</table>
+
+

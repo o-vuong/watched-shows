@@ -13,6 +13,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+
+
+    
+    
+     <nav>
+      <% if !logged_in?%>
+      <div class="container">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+
+      <% else %>
+         <div class="container">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href='/shows/new'>New Show</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+        <% end %>
+      </div>
+    </nav>
+
+
+
+
   </head>
   <body>
   

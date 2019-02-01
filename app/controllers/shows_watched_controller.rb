@@ -2,8 +2,8 @@ class ShowsWatchedController < ApplicationController
   
   # GET: /shows_watched
   get "/shows" do
-    @shows= Show.all
-   erb :'shows/shows.html'
+    @shows= Show.all()
+    erb :'/shows/shows.html'
   end
 
 
@@ -13,7 +13,7 @@ class ShowsWatchedController < ApplicationController
       redirect '/login'
     else
       
-      erb :"shows/new.html" 
+      erb :"/shows/new.html" 
     end
   end
 
@@ -30,7 +30,7 @@ class ShowsWatchedController < ApplicationController
         redirect '/login'
       else
         
-         @shows = Show.find(params[:id])
+         @shows = current_user.show.find_by(params[:id])
         
           erb :'/shows/edit.html'
         
@@ -48,11 +48,14 @@ class ShowsWatchedController < ApplicationController
 
   get "/show/added" do
     erb :"/shows/added_show"
+  end
 
 
   get '/shows/:id' do
-    @shows = Show.find(params[:id])
-    erb :"shows/shows.html"
+   
+    @shows = Show.all()
+   
+    erb :"/shows/added_show.html"
   end
 
     

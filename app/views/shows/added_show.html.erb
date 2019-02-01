@@ -1,5 +1,9 @@
 <h1>The show you just added:</h1>
-<%= @shows.title%>
-<%= @shows.title%> <br/>
-<%= @shows.date%> <br/>
-<%= @shows.id%> <br/>
+    <%= @shows.each do |shows|%>
+<ol>
+   <li><%= shows.title%></li>
+   <li><%= shows.date%></li>
+   <li><%= shows.id%></li> 
+    
+    
+</ol>
