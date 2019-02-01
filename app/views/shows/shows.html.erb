@@ -1,12 +1,24 @@
 <h1>List of shows you've finished</h1>
-<% @shows.each do |show|%>
-<table>
-    <td>Show:<%= show.title%> <br></td>
-    <td>Date:<%= show.date%> <br></td>
-    <td>ID:<%= show.id %><br></td>
-    <td><a href="/shows/:id/edit">Edit</a></td>
-    <% end %>
-    
-</table>
+
+    <table>
+        <tr>
+            <th>Show</th> 
+            <th>Date</th> 
+            <th>ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <% @shows.each do |show|%>
+        <tr>
+            
+            <td><%= show.title.gsub(" ", "-")%></td>
+            <td><%= show.date.to_s.gsub(" ", "-")%></td>
+            <td><%= show.id %></td>
+            <td><a href="/shows/:id/edit">Edit</a></td>
+            <td><a href="/shows/:id/delete">Delete</a></td>
+            <% end %>
+        </tr>
+
+    </table>
 
 

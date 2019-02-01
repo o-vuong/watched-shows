@@ -1,0 +1,14 @@
+
+<div class="container">
+   <% @shows = Show.find_by(params[:id]) %>
+  <p><a href="/">Return to Shows</a></p>
+    
+
+<%binding.pry%>
+
+  <form onsubmit="return confirm('Are you sure you want to delete the following note?')" action="/<%= @shows.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete</button>
+  </form>
+
+</div>

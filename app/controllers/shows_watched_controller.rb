@@ -23,6 +23,9 @@ class ShowsWatchedController < ApplicationController
    
   end
 
+  get "/shows/:id/delete" do
+    erb :'shows/delete.html'
+  end
 
   get '/shows/:id/edit' do
      
@@ -64,6 +67,9 @@ class ShowsWatchedController < ApplicationController
   end
 
     
+  delete '/:id' do
+    redirect '/shows'
+    end
     
 end
 
