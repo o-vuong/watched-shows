@@ -13,9 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20190201145558) do
 
-  create_table "shows_watched", force: :cascade do |t|
-    t.text     "title"
-    t.text     "date"
+  create_table "shows", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "date"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

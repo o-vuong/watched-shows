@@ -2,36 +2,32 @@ class ShowsWatchedController < ApplicationController
 
   # GET: /shows_watched
   get "/shows" do
-    "Welcome back, #{session[:username]}"
+   erb :"shows/show.html" 
   end
 
 
   get '/shows/new' do
     #checks
     if !logged_in?
-      #makes user login if not already
       redirect '/login'
     else
-      "What show have you finished?" #render if logged in
+      
+      erb :"shows/new.html" 
     end
   end
 
 
-  get '/shows/:id/edit' do
-     #checks
-     if !logged_in?
-      redirect '/login'
-    else
-     if post = current_user.shows.find(params[:id])
-      "Edit the show you watched" 
-     else
-      redirect '/shows'
-     end
-    end
-  end
-
-
-
-
-
+  # get '/shows/:id/edit' do
+  #    #checks
+  #     if !logged_in?
+  #       redirect '/login'
+  #     else
+  #     if show = current_user.shows.find(params[:title])≈
+  #       "Edit the show you watched" 
+  #     else
+  #       redirect '/shows'
+  #     end
+  #     end
+  #   end
 end
+
