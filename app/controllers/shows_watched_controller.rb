@@ -18,23 +18,44 @@ class ShowsWatchedController < ApplicationController
   end
 
   post '/shows' do
-    unless Show.valid_params?(params[:id])
-      redirect '/shows/new?error= fill out all information'
-    end
      Show.create(params)
-     redirect '/shows'
+      redirect '/shows'
+   
   end
 
 
   get '/shows/:id/edit' do
-     @shows = Show.all
+     
       if !logged_in?
         redirect '/login'
       else
-      @shows = current_user.shows.find_by(params[:id])
+        
+         @shows = Show.find(params[:id])
+        
           erb :'/shows/edit.html'
+        
+        end
       end
+
+  post "/shows/:id" do 
+    if !logged_in?
+      redirect '/login'
+    else
+      @shows = Show.find(params[:id])
+      redirect "/shows/added"
     end
+  end
+
+  get "/show/added" do
+    erb :"/shows/added_show"
+
+
+  get '/shows/:id' do
+    @shows = Show.find(params[:id])
+    erb :"shows/shows.html"
+  end
+
+    
     
 end
 

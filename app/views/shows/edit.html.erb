@@ -1,17 +1,17 @@
-<h2>Edit <%= @shows.title%></h2>
+<%= @shows.title%>
 
-<form action="/shows/<%=show.id%>" method="post">
-  <input type="hidden" name="_method" value="patch">
+
+<form action="/shows/<%=@shows.id%>" method="post">
   <ul>
     <li>
       <label for="title">Title</label>
-      <input id="title" type="text" name="shows[title]" value="<%= @show.title %>" />
+      <input id="title" type="text" name="title" value="<%= @shows.title %>" />
     </li>
     <li>
       <label for="date">Date Finished</label>
-      <textarea id="date" type="text" name="shows[date]"  value="<%= @show.date %>">
+      <textarea id="date" type="text" name="date"  value="<%= @shows.date %>">
       </textarea>
     </li>
   </ul>
-  <input type="submit" />
+  <input type="submit" value="Update"/>
 </form>
