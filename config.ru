@@ -7,7 +7,6 @@ end
 
 
 use Rack::MethodOverride
-use Rack::Session::Cookie
 run ApplicationController
 use SessionsController
 use ShowsWatchedController
