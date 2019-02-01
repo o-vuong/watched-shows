@@ -9,4 +9,9 @@ class User < ActiveRecord::Base
     def self.find_by_uname(uname)
         User.all.find{|user| user.uname == uname}
     end
+
+    def password_digest=(hashed_psw)
+        hashed_password = hashed_psw
+    end
+
 end

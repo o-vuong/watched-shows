@@ -17,13 +17,11 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/signup" do
-    if params[:username] == "" || params[:email] == "" || params[:password_digest] == ""
-      redirect to '/signup'
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect '/fail'
     else
-      user = User.new(username: params["username"], password: params["password_digest"], email: params["email"])
-      user.save
-      session[:user_id] = @user.id
-      redirect to '/shows/index'
+      User.new(username: params[:username], password: params[:password], email: params[:email])
+      redirect '/login'
     end
 
   end
@@ -31,19 +29,19 @@ class UsersController < ApplicationController
   # GET: /login/5
   get "/login" do
     if !logged_in?
-    erb :"/users/login"
+    erb :"./users/login"
     else
       redirect '/signup'
     end
   end
 
-  post '/login' do
-    user = User.find_by(username: params[:username] , password: params[:password_digest])
-    if user && user.authenticate(params[:password_digest])
-      session[:user_id] = user.id
-      redirect "/tweets"
+  post "/login" do
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to "/shows_watched/index"
     else
-      redirect to '/signup'
+      redirect to "/fail"
     end
   end
 
