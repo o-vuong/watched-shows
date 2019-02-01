@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "/shows_watched/index"
     else
-      redirect to "/fail"
+      redirect to "/users/fail"
     end
   end
 
