@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  get '/users/:uname' do
-    @user = User.find_by_uname(params[:uname])
+  get '/users/:username' do
+    @user = User.find_by_slug(params[:username])
     erb :'users/show'
   end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect '/fail'
     else
-      @user = User.new(username: params[:username], password: params[:password], email: params[:email])
+      @user = User.create(username: params[:username], password: params[:password], email: params[:email])
       redirect '/login'
     end
 
