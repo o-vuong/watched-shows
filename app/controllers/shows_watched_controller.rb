@@ -1,8 +1,9 @@
 class ShowsWatchedController < ApplicationController
-
+  
   # GET: /shows_watched
   get "/shows" do
-   erb :"shows/show.html" 
+    @shows= Show.all
+   erb :'shows/shows.html'
   end
 
 
@@ -16,18 +17,24 @@ class ShowsWatchedController < ApplicationController
     end
   end
 
+  post '/shows' do
+    unless Show.valid_params?(params[:id])
+      redirect '/shows/new?error= fill out all information'
+    end
+     Show.create(params)
+     redirect '/shows'
+  end
 
-  # get '/shows/:id/edit' do
-  #    #checks
-  #     if !logged_in?
-  #       redirect '/login'
-  #     else
-  #     if show = current_user.shows.find(params[:title])≈
-  #       "Edit the show you watched" 
-  #     else
-  #       redirect '/shows'
-  #     end
-  #     end
-  #   end
+
+  get '/shows/:id/edit' do
+     @shows = Show.all
+      if !logged_in?
+        redirect '/login'
+      else
+      @shows = current_user.shows.find_by(params[:id])
+          erb :'/shows/edit.html'
+      end
+    end
+    
 end
 

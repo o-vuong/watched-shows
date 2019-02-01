@@ -1,9 +1,0 @@
-<h2> Here are the shows you've watched </h2>
-
-<h1><%= @shows.title %></h1>
-<%= @shows.content %>
-
-<form method="post" action="/shows/<%= @shows.id %>">
-  <input type="hidden" name="_method" value="delete" />
-  <input type="submit" />
-</form>

@@ -1,13 +1,15 @@
-<form action="/shows_watched/<%= @shows.id %>" method="post">
+<h2>Edit <%= @shows.title%></h2>
+
+<form action="/shows/<%=show.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
   <ul>
     <li>
       <label for="title">Title</label>
-      <input id="title" type="text" name="shows[title]" value="<%= @shows.title %>" />
+      <input id="title" type="text" name="shows[title]" value="<%= @show.title %>" />
     </li>
     <li>
       <label for="date">Date Finished</label>
-      <textarea id="date" type="text" name="shows[date]"  value="<%= @shows.date %>">
+      <textarea id="date" type="text" name="shows[date]"  value="<%= @show.date %>">
       </textarea>
     </li>
   </ul>
