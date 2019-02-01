@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET: /users/new
   get "/signup" do
     if !logged_in?
-    erb :"/users/new.html"
+    erb :"/users/new"
     else
       redirect to '/shows_watched/index'
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect '/fail'
     else
-      User.new(username: params[:username], password: params[:password], email: params[:email])
+      @user = User.new(username: params[:username], password: params[:password], email: params[:email])
       redirect '/login'
     end
 
@@ -41,13 +41,12 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "/shows_watched/index"
     else
-      redirect to "/users/fail"
+      redirect to "/fail"
     end
   end
 
-  # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
+  get '/fail' do
+    erb :'/users/fail'
   end
 
 end
