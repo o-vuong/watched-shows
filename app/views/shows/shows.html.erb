@@ -8,17 +8,20 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <% @shows.each do |show|%>
+        <% @shows = Show.all%>
+        
+        <% @shows.each do |tv|%>
         <tr>
             
-            <td><%= show.title.gsub(" ", "-")%></td>
-            <td><%= show.date.to_s.gsub(" ", "-")%></td>
-            <td><%= show.id %></td>
-            <td> <form method="post" action="/shows/<%=show.id%>">
+            <td><%= tv.title%></td>
+            <td><%= tv.date.to_s%></td>
+            <td><%= tv.id %></td>
+           
+            <td> <form method="post" action="/shows/<%=tv.id%>">
                     <input id="hidden" type="hidden" name="_method" value="PATCH">
                     <input type="submit" value="Edit">
                 </form></td>
-            <td> <form method="post" action="/shows/<%=show.id%>/delete">
+            <td> <form method="post" action="/shows/<%=tv.id%>/delete">
                     <input id="hidden" type="hidden" name="_method" value="DELETE">
                     <input type="submit" value="Delete Show">
                 </form>    
