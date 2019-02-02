@@ -8,7 +8,7 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <% @shows = Show.all%>
+        <% @shows = Show.all %>
         
         <% @shows.each do |tv|%>
         <tr>
@@ -17,11 +17,11 @@
             <td><%= tv.date.to_s%></td>
             <td><%= tv.id %></td>
            
-            <td> <form method="post" action="/shows/<%=tv.id%>">
+            <td> <form action="/shows/<%=tv.id%>/edit" method="POST">
                     <input id="hidden" type="hidden" name="_method" value="PATCH">
                     <input type="submit" value="Edit">
                 </form></td>
-            <td> <form method="post" action="/shows/<%=tv.id%>/delete">
+            <td> <form action="/shows/<%=tv.id%>/delete" method="POST">
                     <input id="hidden" type="hidden" name="_method" value="DELETE">
                     <input type="submit" value="Delete Show">
                 </form>    

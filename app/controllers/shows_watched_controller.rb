@@ -35,15 +35,15 @@ class ShowsWatchedController < ApplicationController
 
   get '/shows/:id/edit' do
      @shows = Show.find_by_id(params[:id])
-      if !logged_in?
+        if !logged_in?
         redirect '/login'
-      else
-        if @shows && @shows.user == current_user
-          else
-          erb :'/shows/edit.html'
+        else
+          if @shows && @shows.user == current_user
+            else
+            erb :'/shows/edit.html'
+          end
         end
-      end
-    end
+  end
 
   post "/shows/:id" do 
     if !logged_in?
@@ -111,7 +111,7 @@ class ShowsWatchedController < ApplicationController
 
   
   delete '/shows/:id/delete' do
-    if !logged_in?
+    if logged_in?
       @shows = Show.find_by_id(params[:id])
       if @shows && @shows.user == current_user
         @shows.delete
