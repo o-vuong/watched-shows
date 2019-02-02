@@ -14,9 +14,9 @@
             <td><%= show.title.gsub(" ", "-")%></td>
             <td><%= show.date.to_s.gsub(" ", "-")%></td>
             <td><%= show.id %></td>
-            <td> <form method="post" action="/shows/<%=show.id%>/edit">
+            <td> <form method="post" action="/shows/<%=show.id%>">
                     <input id="hidden" type="hidden" name="_method" value="PATCH">
-                    <input type="submit" value="Edit Show">
+                    <input type="submit" value="Edit">
                 </form></td>
             <td> <form method="post" action="/shows/<%=show.id%>/delete">
                     <input id="hidden" type="hidden" name="_method" value="DELETE">

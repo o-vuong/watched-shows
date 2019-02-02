@@ -1,32 +1,45 @@
 class ShowsWatchedController < ApplicationController
-  
-  # GET: /shows_watched
   get "/shows" do
-    @shows= Show.all
-    erb :'/shows/shows.html'
+    if logged_in?
+      @shows = Show.all
+      erb :'/shows/shows.html'
+    else
+      redirect '/login'
+    end
   end
 
 
   get '/shows/new' do
     #checks
-    if !logged_in?
-      redirect '/login'
+    if logged_in?
+     redirect '/login'
     else
-      
-      erb :"/shows/new.html" 
+      erb :"/shows/new.html"    
     end
   end
 
   post '/shows' do
-     Show.create(params)
-      redirect '/shows'
-   
+    if logged_in?
+      if params[:title] == ""
+        redirect to "/shows/new"
+      else
+        @shows = current_user.show.build(title: params[:title])
+        if @shows.save
+          redirect to "/shows/#{@shows.id}"
+        else 
+          redirect to "/shows/new"
+        end 
+      end
+    else 
+      redirect to '/login' 
+    end
   end
+
 
 
   get '/shows/:id/edit' do
      @shows = Show.find_by_id(params[:id])
-      if !logged_in?
+      if logged_in?
         redirect '/login'
       else
         if @shows && @shows.user == current_user
@@ -37,11 +50,11 @@ class ShowsWatchedController < ApplicationController
     end
 
   post "/shows/:id" do 
-    if !logged_in?
+    if logged_in?
       redirect '/login'
     else
       if @shows && @shows.user == current_user
-        if @tweet.update(title: params[:title], date: params[:date])
+        if @shows.update(title: params[:title], date: params[:date])
           redirect "/shows/#{@shows.id}"
         else
           "/shows/#{@shows.id}/edit"
@@ -52,6 +65,33 @@ class ShowsWatchedController < ApplicationController
 
     end
   end
+
+
+
+
+  patch '/shows/:id' do
+    if logged_in?
+      if params[:title] == "" 
+        redirect to "/shows/#{params[:id]}/edit"
+      else
+        @shows = Show.find_by_id(params[:id])
+        if @shows && @shows.user == current_user
+          if @shows.update(title: params[:title], date: params[:date])
+            redirect to "/shows/#{@shows.id}"
+          else 
+            redirect to "/shows/#{@shows.id}/edit"
+          end
+        else 
+          redirect to '/shows'
+        end
+      end
+    else 
+      redirect to '/login'
+    end
+  end
+
+
+
 
   get '/shows/:id/edit' do
     if logged_in?
@@ -66,21 +106,16 @@ class ShowsWatchedController < ApplicationController
     end
   end
 
-  get "/shows/added" do
-    erb :"/shows/added_show"
-  end
 
 
-  get '/shows/:id' do
-    
-    @shows = Show.all()
-   
-    erb :"/shows/added_show.html"
-  end
+
+
+
+
 
     
   delete '/shows/:id/delete' do
-    if !logged_in?
+    if logged_in?
       @shows = Show.find_by_id(params[:id])
       if @shows && @shows.user == current_user
         @shows.delete
