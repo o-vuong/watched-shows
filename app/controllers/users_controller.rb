@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   get '/users/:id' do
     if !logged_in?
       redirect '/shows'
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/new.html'
     else
-      redirect to '/clubs'
+      redirect to '/shows'
     end
   end
 
@@ -25,7 +24,8 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
+      @user = User.create(params)
+      binding.pry
       session[:user_id] = @user.id
       redirect '/shows'
     end

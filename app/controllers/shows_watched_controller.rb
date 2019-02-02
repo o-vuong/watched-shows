@@ -16,15 +16,15 @@ class ShowsWatchedController < ApplicationController
     if !logged_in?
      redirect '/login'
     else
+      
       erb :"/shows/new.html"    
     end
   end
 
-  post "/clubs" do
+  post "/shows" do
     if !logged_in?
-      unless Show.valid_params?(params)
-        redirect "/shows/new?error=invalid golf club"
-      end
+      redirect '/login'
+    else
       Show.create(params)
       redirect "/shows"
     end
@@ -39,8 +39,8 @@ class ShowsWatchedController < ApplicationController
         redirect '/login'
       else
         if @shows && @shows.user == current_user
-        else
-        erb :'/shows/edit.html'
+          else
+          erb :'/shows/edit.html'
         end
       end
     end
