@@ -1,5 +1,9 @@
-<form method="post" action="/shows/<%=@shows.id%>">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content" value="Edit">
-  <input type="submit" value="submit">
-</form>
+<div class = container>
+  <h1>Edit <%=@shows.title%> </h1>
+  <form method="post" action="/shows/<%=@shows.id%>">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <input type="text" name="content" value= "<%=@shows.title%>">
+    <input type="number" name="content" value= "<%=@shows.date%>">
+    <input type="submit" value="submit">
+  </form>
+</div>
