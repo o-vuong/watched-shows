@@ -23,6 +23,8 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(:email => session[:email]) if session[:email]
     end
+
+    
     def login(email,password)
       user = User.find_by(:email => email)
       if user && user.authenticate(password)
