@@ -1,45 +1,41 @@
 class ShowsWatchedController < ApplicationController
+  
   get "/shows" do
-    if logged_in?
+    if !logged_in?
+      redirect '/login'
+    else
+      @shows = current_user.show.build(params)
       @shows = Show.all
       erb :'/shows/shows.html'
-    else
-      redirect '/login'
     end
   end
 
 
   get '/shows/new' do
     #checks
-    if logged_in?
+    if !logged_in?
      redirect '/login'
     else
       erb :"/shows/new.html"    
     end
   end
 
-  post '/shows' do
-    if logged_in?
-      if params[:title] == ""
-        redirect to "/shows/new"
-      else
-        @shows = current_user.show.build(title: params[:title])
-        if @shows.save
-          redirect to "/shows/#{@shows.id}"
-        else 
-          redirect to "/shows/new"
-        end 
+  post "/clubs" do
+    if !logged_in?
+      unless Show.valid_params?(params)
+        redirect "/clubs/new?error=invalid golf club"
       end
-    else 
-      redirect to '/login' 
+      Show.create(params)
+      redirect "/shows"
     end
   end
+  
 
 
 
   get '/shows/:id/edit' do
      @shows = Show.find_by_id(params[:id])
-      if logged_in?
+      if !logged_in?
         redirect '/login'
       else
         if @shows && @shows.user == current_user
@@ -50,7 +46,7 @@ class ShowsWatchedController < ApplicationController
     end
 
   post "/shows/:id" do 
-    if logged_in?
+    if !logged_in?
       redirect '/login'
     else
       if @shows && @shows.user == current_user
@@ -90,6 +86,14 @@ class ShowsWatchedController < ApplicationController
     end
   end
 
+  get '/shows/:id' do
+    if logged_in?
+      @shows = Show.find_by_id(params[:id])
+      erb :"shows/shows"
+    else
+      redirect to '/login'
+    end
+  end
 
 
 
@@ -115,7 +119,7 @@ class ShowsWatchedController < ApplicationController
 
     
   delete '/shows/:id/delete' do
-    if logged_in?
+    if !logged_in?
       @shows = Show.find_by_id(params[:id])
       if @shows && @shows.user == current_user
         @shows.delete

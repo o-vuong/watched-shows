@@ -1,18 +1,62 @@
 class UsersController < ApplicationController
 
-  get '/signup' do
-    erb :"users/new.html"
-  end
+  get '/users/:id' do
+    if !logged_in?
+      redirect '/shows'
+    end
 
-  post '/users' do 
-    @user = User.new
-    @user.email = params[:email]
-    @user.password = params[:password]
-    if @user.save
-      redirect '/login'
+    @user = User.find(params[:id])
+    if !@user.nil? && @user == current_user
+      erb :'users/show'
     else
-      erb :'/users/new.html'
+      redirect '/shows'
     end
   end
-end
 
+  get '/signup' do
+    if !session[:user_id]
+      erb :'users/new'
+    else
+      redirect to '/clubs'
+    end
+  end
+
+  post '/signup' do 
+    if params[:username] == "" || params[:password] == ""
+      redirect to '/signup'
+    else
+      @user = User.create(:username => params[:username], :password => params[:password])
+      session[:user_id] = @user.id
+      redirect '/shows'
+    end
+  end
+
+  get '/login' do 
+    @error_message = params[:error]
+    if !session[:user_id]
+      erb :'users/login'
+    else
+      redirect '/shows'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/shows"
+    else
+      redirect to '/signup'
+    end
+  end
+
+  get '/logout' do
+    if session[:user_id] != nil
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
+  end
+
+end
