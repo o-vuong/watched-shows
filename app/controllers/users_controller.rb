@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     if !@user.nil? && @user == current_user
-      erb :'users/show'
+      erb :'users/show.html'
     else
       redirect '/shows'
     end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !session[:user_id]
-      erb :'users/new'
+      erb :'users/new.html'
     else
       redirect to '/clubs'
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   get '/login' do 
     @error_message = params[:error]
     if !session[:user_id]
-      erb :'users/login'
+      erb :'users/login.html'
     else
       redirect '/shows'
     end
