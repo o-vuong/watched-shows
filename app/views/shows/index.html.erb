@@ -17,15 +17,11 @@
             <td><%= tv.date.to_s%></td>
             <td><%= tv.id %></td>
            
-            <td> <form action="/shows/<%=tv.id%>" method="POST">
-                    <input id="hidden" type="hidden" name="_method" value="PATCH">
-                    <input type="submit" value="Edit">
-                </form>
+            <td> 
+            <a href="/shows/<%= tv.id %>/edit"> Edit </a>
             </td>
-            <td> <form action="/shows/<%=tv.id%>/delete" method="POST">
-                    <input id="hidden" type="hidden" name="_method" value="DELETE">
-                    <a href="/shows/:id/delete"><input type="submit" value="Delete Show"></a>
-                </form>    
+            <td> 
+            <a href="/shows/<%= tv.id %>/delete">Delete Post</a>  
             </td>
                
             <% end %>

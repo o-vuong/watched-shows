@@ -1,6 +1,6 @@
 <div class = container>
   <h1>Edit <%=@shows.title%> </h1>
-  <form method="post" action="/shows/<%=@shows.id%>">
+  <form method="post" action="/shows/<%=@shows.user_id%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     <input type="text" name="content" value= "<%=@shows.title%>">
     <input type="number" name="content" value= "<%=@shows.date%>">

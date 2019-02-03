@@ -1,7 +1,7 @@
 <h1><%=@shows.title %></h1>
 <%= @shows.date %>
 
-<form method="post" action="/shows/<%= @shows.id %>">
+<form method="post" action="/shows/<%= @shows.user_id %>">
   <input type="hidden" name="_method" value="delete" />
   <input type="submit" />
 </form>
