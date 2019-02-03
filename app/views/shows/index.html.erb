@@ -6,7 +6,6 @@
             <th>Date</th> 
             <th>ID</th>
             <th>Edit</th>
-            <th>Delete</th>
         </tr>
         <% @shows = Show.all %>
         
@@ -19,9 +18,6 @@
            
             <td> 
             <a href="/shows/<%= tv.id %>/edit"> Edit </a>
-            </td>
-            <td> 
-            <a href="/shows/<%= tv.id %>/delete">Delete Post</a>  
             </td>
                
             <% end %>
