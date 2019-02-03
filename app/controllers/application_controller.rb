@@ -22,12 +22,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def logged_in?
-      !!session[:user_id]
+      !!session[:email]
     end
 
 
     def current_user
-      User.find(session[:user_id])
+      User.find(session[:email])
     end
 
     
