@@ -9,7 +9,6 @@ class ShowsWatchedController < ApplicationController
   post '/shows' do
     check
       Show.create(params)
-      session[:user_id] = @user.id
       redirect '/shows'
   end 
   

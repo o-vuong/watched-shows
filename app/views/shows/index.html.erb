@@ -5,6 +5,7 @@
             <th>Show</th> 
             <th>Date</th> 
             <th>ID</th>
+            <th>By</th>
             <th>Edit</th>
         </tr>
         <% @shows = Show.all %>
@@ -19,10 +20,10 @@
             <td> 
             <a href="/shows/<%= tv.id %>/edit"> Edit </a>
             </td>
-               
+            
             <% end %>
         </tr>
-
+        
     </table>
 
 
