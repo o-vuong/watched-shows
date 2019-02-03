@@ -1,23 +1,23 @@
-require './config/environment'
+require "./config/environment"
 
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
+    set :public_folder, "public"
+    set :views, "app/views"
     enable :sessions
-    set :session_secret, 'watched_shows'
+    set :session_secret, "watched_shows"
   end
 
   get "/" do
-    session[:welcome] = 'welcome'
+    session[:welcome] = "welcome"
     erb :welcome
   end
 
   helpers do 
     def check
       if !logged_in?
-        redirect '/login'
+        redirect "/login"
       end
     end
 
@@ -36,13 +36,13 @@ class ApplicationController < Sinatra::Base
       if user && user.authenticate(password)
         session[:id] = user.id
       else
-        redirect '/login'
+        redirect "/login"
       end
     end
 
     def logout!
       session.clear
-      redirect '/'
+      redirect "/"
     end
     end
 end

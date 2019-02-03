@@ -1,13 +1,13 @@
 <h1>Signup</h1>
 <%= "Must include email and password" if @user && @user.errors.any?%>
- <form action='/signup' method='POST'>
+ <form action="/signup" method="POST">
  <p>
  <label for="email">Email</label>
-    <input type='email' name='email' id='email'/>
+    <input type="email" name="email" id="email"/>
 </p>
  <p>
  <label for="password">Password</label>
-    <input type='password' name='password' id='password'/>
+    <input type="password" name="password" id="password"/>
 </p>
 <input type="submit"/>
 
