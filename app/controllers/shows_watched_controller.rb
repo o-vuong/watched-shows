@@ -33,14 +33,11 @@ class ShowsWatchedController < ApplicationController
       erb :"shows/edit.html"
   end
 
-  post "/shows/:id" do
+  patch "/shows/:id" do
    check
       @shows = Show.find(params[:id])
-      unless Show.valid_params?(params)
-        redirect "/shows/#{@shows.id}/edit?error=invalid shows"
-      end
       @shows.update(params.select{|k|k=="title" || k=="date"})
-      redirect "/shows/#{@shows.id}"
+      redirect "/shows"
   end
 
   patch "/shows/" do
