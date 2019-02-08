@@ -8,13 +8,19 @@ class ShowsWatchedController < ApplicationController
 
   post "/shows" do
     check
-      Show.create(params)
+     @show = Show.create(params)
+     @show.valid?
+     if @show.errors[:title]
+      erb :"/shows/show_error.html"
+     else 
       redirect "/shows"
+     end
   end 
   
 
   get "/shows/new" do
     check
+      @user = current_user
       erb :"/shows/new.html"
   end
 
@@ -28,9 +34,12 @@ class ShowsWatchedController < ApplicationController
       
   get "/shows/:id/edit" do
     check
-      @shows && @shows.user == current_user
       @shows = Show.find_by_id(params[:id]) 
-      erb :"shows/edit.html"
+      if @shows && @shows.user == current_user
+        erb :"shows/edit.html"
+      else
+        redirect '/shows'
+      end
   end
 
   patch "/shows/:id" do

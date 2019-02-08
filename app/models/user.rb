@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-    has_many  :show
+    validates :email, uniqueness: true
+    has_many  :shows
   
 
 

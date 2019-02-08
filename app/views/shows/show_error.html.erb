@@ -1,0 +1,13 @@
+
+<% if @show.errors.any? %>
+  <div id="error_explanation">
+    <h2>Error prohibited this article from being saved:</h2>
+ 
+    <ul>
+    <% @show.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    <li><a href="/shows/new">Click here to fix your error(s)</a></li>
+    </ul>
+  </div>
+<% end %>

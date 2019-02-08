@@ -12,13 +12,18 @@ class UsersController < ApplicationController
 
   get "/signup" do
       erb :"users/new.html"
-      redirect to "/shows"
   end
 
   post "/signup" do 
       @user = User.create(params)
+      @user.valid?
+      if @user.errors[:email]
+        erb:'users/user_error.html'
+      else
       session[:user_id] = @user.id
       redirect "/shows"
+      end
+
   end
 
   get "/login" do 
