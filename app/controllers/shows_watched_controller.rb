@@ -9,8 +9,7 @@ class ShowsWatchedController < ApplicationController
   post "/shows" do
     check
      @show = Show.create(params)
-     @show.valid?
-     if @show.errors[:title]
+     if !@show.valid?
       erb :"/shows/show_error.html"
      else 
       redirect "/shows"

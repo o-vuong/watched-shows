@@ -16,8 +16,7 @@ class UsersController < ApplicationController
 
   post "/signup" do 
       @user = User.create(params)
-      @user.valid?
-      if @user.errors[:email]
+      if !@user.valid?
         erb:'users/user_error.html'
       else
       session[:user_id] = @user.id
